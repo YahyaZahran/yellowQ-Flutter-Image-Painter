@@ -15,7 +15,7 @@ class Controller extends ChangeNotifier {
 
   Offset? _start, _end;
 
-  int _strokeMultiplier = 1;
+  double _strokeMultiplier = 1;
   bool _paintInProgress = false;
 
   Paint get brush => Paint()
@@ -129,7 +129,7 @@ class Controller extends ChangeNotifier {
     bool? fill,
     PaintMode? mode,
     String? text,
-    int? strokeMultiplier,
+    double? strokeMultiplier,
   }) {
     _strokeWidth = strokeWidth ?? _strokeWidth;
     _color = color ?? _color;

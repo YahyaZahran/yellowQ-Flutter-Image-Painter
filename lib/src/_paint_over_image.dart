@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:ui' as ui;
-
+import 'dart:math';
 import 'package:flutter/material.dart' hide Image;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -437,7 +437,7 @@ class ImagePainterState extends State<ImagePainter> {
   late final TextEditingController _textController;
   late final TransformationController _transformationController;
 
-  int _strokeMultiplier = 1;
+  double _strokeMultiplier = 1;
   late TextDelegate textDelegate;
   @override
   void initState() {
@@ -517,9 +517,7 @@ class ImagePainterState extends State<ImagePainter> {
   ///Dynamically sets stroke multiplier on the basis of widget size.
   ///Implemented to avoid thin stroke on high res images.
   _setStrokeMultiplier() {
-    if ((_image!.height + _image!.width) > 1000) {
-      _strokeMultiplier = (_image!.height + _image!.width) ~/ 1000;
-    }
+    _strokeMultiplier = max(_image!.width, _image!.height) * .001;
     _controller.update(strokeMultiplier: _strokeMultiplier);
   }
 
